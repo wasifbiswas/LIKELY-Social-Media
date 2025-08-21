@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  @media (max-width: 768px) {
+    html {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    html {
+      font-size: 12px;
+    }
+  }
+}
+
+@layer utilities {
+  .mobile-safe-area {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .snap-start {
+    scroll-snap-align: start;
+  }
+
+  .snap-y {
+    scroll-snap-type: y mandatory;
+  }
+
+  .snap-mandatory {
+    scroll-snap-type: y mandatory;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Better video fitting for reels - Instagram 9:16 aspect ratio */
+  .reel-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    background: black;
+  }
+
+  .reel-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Mobile Portrait - Full screen */
+  @media (max-aspect-ratio: 9/16) and (max-width: 768px) {
+    .reel-container {
+      width: 100vw;
+      height: 100vh;
+    }
+    .reel-video {
+      width: 100vw;
+      height: 100vh;
+    }
+  }
+
+  /* Desktop/Tablet - Instagram style centered with 9:16 ratio */
+  @media (min-aspect-ratio: 9/16) or (min-width: 769px) {
+    .reel-container {
+      width: calc(100vh * 9 / 16);
+      height: 100vh;
+      max-width: 450px; /* Instagram max width */
+      margin: 0 auto;
+    }
+  }
+
+  /* Very wide screens - limit max width */
+  @media (min-width: 1200px) {
+    .reel-container {
+      max-width: 400px;
+    }
+  }
+
+  /* Very tall/narrow screens */
+  @media (max-width: 400px) {
+    .reel-container {
+      width: 100vw;
+    }
+  }
+}
